@@ -9,7 +9,7 @@ get '/' do
   "hello world"
 end
 
-get '/sms' do
+post '/sms' do
   @ci = CivicInfo.new()
   voter = @ci.voter_info(4000, params[:Body])
   twiml = Twilio::TwiML::Response.new do |r|
