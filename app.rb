@@ -5,10 +5,6 @@ require 'civic_info'
 account_sid = ENV['TWILIO_ACCT_SID']
 auth_token = ENV['TWILIO_AUTH_TOKEN']
 
-get '/' do
-  "hello world"
-end
-
 post '/sms' do
   @ci = CivicInfo.new()
   voter = @ci.voter_info(4000, params[:Body])
