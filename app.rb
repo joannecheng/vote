@@ -15,7 +15,7 @@ get '/sms' do
   twiml = Twilio::TwiML::Response.new do |r|
     if !voter[:pollingLocations].nil?
       location = voter[:pollingLocations].first[:address]
-      r.Sms "closest polling loc: #{location[:locationName]} #{location[:line1]} #{location[:city]} #{location[:state]} }"
+      r.Sms "closest polling loc: #{location[:locationName]} #{location[:line1]} #{location[:city]} #{location[:state]}"
     else
       r.Sms "No polling locations found."
     end
