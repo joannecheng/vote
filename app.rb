@@ -9,7 +9,7 @@ get '/' do
   "hello world"
 end
 
-get '/sms' do
+post '/sms' do
   twiml = Twilio::TwiML::Response.new do |r|
     r.Sms "testing testing 123"
   end
