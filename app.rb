@@ -14,7 +14,7 @@ post '/sms' do
   voter = @ci.voter_info(4000, params[:Body])
   twiml = Twilio::TwiML::Response.new do |r|
     if !voter[:pollingLocations].nil?
-      r.Sms "closest polling loc: #{voter[:pollingLocations].first}"
+      r.Sms "closest polling loc: #{voter[:pollingLocations].first[:address][:line1]}"
     else
       r.Sms "No polling locations found."
     end
