@@ -4,15 +4,20 @@ require 'civic_info'
 
 account_sid = ENV['TWILIO_ACCT_SID']
 auth_token = ENV['TWILIO_AUTH_TOKEN']
-@ci = CivicInfo.new()
 
 get '/' do
   "hello world"
 end
 
 post '/sms' do
+  @ci = CivicInfo.new()
+  voter = @ci.voter_info(4000, params[:Body])
   twiml = Twilio::TwiML::Response.new do |r|
-    r.Sms "closest polling loc: #{@ci.voter_info(4000, params[:Body])[:polingLocations][:address][0].to_s}" || "No polling locations found."
+    if !voter[:pollingLocations].nil?
+      r.Sms "closest polling loc: #{voter[:pollingLocations].first}"
+    else
+      r.Sms "No polling locations found."
+    end
   end
   twiml.text
 end
